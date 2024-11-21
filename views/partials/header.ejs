@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReallyReallyGoodReads</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <img src="/images/logo.png" alt="Logo" class="logo" />
+        <h1><a href="/" class="logo-link">ReallyReallyGoodReads</a></h1>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <% if (user) { %>
+        <!-- Only show these buttons if the user is logged in -->
+        <li><a href="/books" class="primary-button">Books</a></li>
+        <li>
+          <a href="/reviews" class="primary-button">Community reviews</a>
+        </li>
+        <li>
+          <a href="/reviews/my-reviews" class="primary-button">My reviews</a>
+        </li>
+        <li><a href="/logout" class="primary-button">Logout</a></li>
+        <% } else { %>
+        <li><a href="/login" class="primary-button">Login / Register</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </body>
+</html>

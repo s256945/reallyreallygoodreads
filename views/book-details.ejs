@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<main class="book-details">
+  <div class="book-header">
+    <h2 class="book-title"><%= book.title %></h2>
+    <p class="book-author">by <%= book.author %></p>
+  </div>
+
+  <div class="book-content">
+    <div class="book-info">
+      <h3>About the Book</h3>
+      <p class="book-description"><%= book.description %></p>
+
+      <div class="book-meta">
+        <p>Genre: <%= book.genre %></p>
+        <p>
+          Published: <%= new Date(book.published_date).toLocaleDateString() %>
+        </p>
+        <p>ISBN: <%= book.isbn %></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="reviews">
+    <h3>Reviews</h3>
+    <button class="secondary-button" id="add-review-btn">Add a Review</button>
+    <% if (reviews && reviews.length > 0) { %>
+    <ul class="review-list">
+      <% reviews.forEach(function(review) { %>
+      <li class="review-item">
+        <p class="reviewer-name"><%= review.reviewer %>:</p>
+        <p class="review-content">"<%= review.review_text %>"</p>
+        <p class="review-rating">Rating: <%= review.rating %> / 5</p>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No reviews yet. Be the first to review this book!</p>
+    <% } %>
+  </section>
+</main>
+
+<%- include('add-review', { bookId: book.id }) %>
+
+<footer><%- include('./partials/footer') %></footer>
+
+<script>
+  const modal = document.getElementById("review-modal");
+  const btn = document.getElementById("add-review-btn");
+
+  btn.addEventListener("click", function () {
+    modal.style.display = "block";
+    setTimeout(() => {
+      modal.style.opacity = "1";
+    }, 10);
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.style.opacity = "0";
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300);
+    }
+  });
+</script>

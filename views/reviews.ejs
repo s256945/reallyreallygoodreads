@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+
+<main class="reviews">
+  <h2>All reviews</h2>
+
+  <section class="filter-section">
+    <label for="user-filter">Filter by User:</label>
+    <select id="user-filter">
+      <option value="all">All Users</option>
+      <% uniqueUsers.forEach(function(user) { %>
+      <option value="<%= user %>"><%= user %></option>
+      <% }); %>
+    </select>
+
+    <label for="genre-filter">Filter by Genre:</label>
+    <select id="genre-filter">
+      <option value="all">All Genres</option>
+      <% uniqueGenres.forEach(function(genre) { %>
+      <option value="<%= genre %>"><%= genre %></option>
+      <% }); %>
+    </select>
+  </section>
+
+  <% if (reviews && reviews.length > 0) { %>
+  <ul id="reviews-list">
+    <% reviews.forEach(function(review) { %>
+    <li
+      class="review-item"
+      data-user="<%= review.reviewer %>"
+      data-genre="<%= review.genre %>"
+    >
+      <p><strong>Book name:</strong> <%= review.title %></p>
+      <p><strong>Book genre:</strong> <%= review.genre %></p>
+      <p><strong>User:</strong> <%= review.reviewer %></p>
+      <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
+      <p><strong>Review:</strong> <%= review.review_text %></p>
+    </li>
+    <% }); %>
+  </ul>
+  <% } else { %>
+  <p>No reviews found.</p>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const userFilter = document.getElementById("user-filter");
+    const genreFilter = document.getElementById("genre-filter");
+    const reviewsList = document.getElementById("reviews-list");
+
+    function filterReviews() {
+      const selectedUser = userFilter.value;
+      const selectedGenre = genreFilter.value;
+
+      if (reviewsList) {
+        const reviews = reviewsList.getElementsByClassName("review-item");
+
+        Array.from(reviews).forEach((review) => {
+          const reviewUser = review.getAttribute("data-user");
+          const reviewGenre = review.getAttribute("data-genre");
+
+          if (
+            (selectedUser === "all" || reviewUser === selectedUser) &&
+            (selectedGenre === "all" || reviewGenre === selectedGenre)
+          ) {
+            review.style.display = "block";
+          } else {
+            review.style.display = "none";
+          }
+        });
+      } else {
+        console.warn("No reviews found.");
+      }
+    }
+
+    userFilter.addEventListener("change", filterReviews);
+    genreFilter.addEventListener("change", filterReviews);
+  });
+</script>

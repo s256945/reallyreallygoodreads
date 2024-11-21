@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+<main>
+  <h2>Books List</h2>
+  <div class="book-list">
+    <button class="secondary-button" id="add-book-btn">Add a New Book</button>
+
+    <div class="book-list">
+      <% if (books.length > 0) { %>
+        <div class="book-grid">
+          <% books.forEach(function(book) { %>
+            <a href="/books/<%= book.id %>" class="book-card">
+              <div>
+                <h3><%= book.title %></h3>
+                <img src="/images/logo.png" alt="book" class="book-cover" />
+                <p>by <%= book.author %></p>
+              </div>
+            </a>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <p>No books found.</p>
+      <% } %>
+    </div>
+</main>
+<%- include('add-book') %>
+<footer><%- include('./partials/footer'); %></footer>
+
+<script>
+  const addBookModal = document.getElementById("add-book-modal");
+  const addBookBtn = document.getElementById("add-book-btn");
+
+  addBookBtn.addEventListener("click", function () {
+    addBookModal.style.display = "block";
+    setTimeout(() => {
+      addBookModal.style.opacity = "1";
+    }, 10);
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target === addBookModal) {
+      addBookModal.style.opacity = "0";
+      setTimeout(() => {
+        addBookModal.style.display = "none";
+      }, 300);
+    }
+  });
+
+  document
+    .querySelector("#add-book-modal form")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      const description = document.getElementById("description").value;
+      const genre = document.getElementById("genre").value;
+      const publishedDate = document.getElementById("published-date").value;
+      const isbn = document.getElementById("isbn").value;
+
+      try {
+        const response = await fetch("/books/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, author, description, genre, publishedDate, isbn }),
+        });
+        alert("Book added successfully");
+        
+        addBookModal.style.opacity = "0";
+        setTimeout(() => {
+          addBookModal.style.display = "none";
+        }, 300);
+      } catch (error) {
+        console.error("Error adding book:", error);
+      }
+    });
+</script>

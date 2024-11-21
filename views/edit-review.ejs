@@ -1,0 +1,24 @@
+<div id="review-modal" class="modal">
+    <div class="modal-content">
+      <h2>Edit your review</h2>
+      <form action="/reviews/edit" method="POST">
+        <input type="hidden" id="review-id" name="reviewId" />
+  
+        <label for="review-rating">Rating (1-5):</label>
+        <input
+          type="number"
+          id="review-rating"
+          name="rating"
+          min="1"
+          max="5"
+          required
+        />
+  
+        <label for="review-text">Your Review:</label>
+        <textarea id="review-text" name="reviewText" required></textarea>
+  
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+  

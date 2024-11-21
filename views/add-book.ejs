@@ -1,0 +1,34 @@
+<div id="add-book-modal" class="modal">
+    <div class="modal-content">
+      <h2>Add a New Book</h2>
+      <form id="add-book-form" action="/books/add" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+  
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required />
+  
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+  
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" required />
+  
+        <label for="published-date">Published Date:</label>
+        <input type="date" id="published-date" name="published-date" required />
+  
+        <label for="isbn">ISBN:</label>
+        <input
+          type="text"
+          id="isbn"
+          name="isbn"
+          pattern="^\d{13}$"
+          title="ISBN must be 13 digits"
+          required
+        />
+  
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
+  </div>
+  
