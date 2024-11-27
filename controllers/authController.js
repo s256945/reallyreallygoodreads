@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
 
     if (rows.length === 0) {
       return res.render("login", {
-        errorMessage: "User not found, please try again or register",
+        errorMessage: "User not found, please try again with a different username, or register",
         user: null,
       });
     }
