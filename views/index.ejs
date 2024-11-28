@@ -1,32 +1,38 @@
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  
-  <body>
-    <%- include('partials/header') %>
-    <main>
-      <section>
-        <h2>About</h2>
-        <p>
-          ReallyReallyGoodReads is a website dedicated to providing a platform for
-          book lovers to discover and review books across all genres. Our goal is
-          to offer a space where users can find reliable book recommendations and
-          share their reading experiences.
-        </p>
-        <p>
-          We feature a growing collection of book reviews from users who rate and
-          comment on books they've read. Reviews are organised by genre, and users
-          can browse, filter, and search for books based on different criteria,
-          including author, title, and rating.
-        </p>
-      </section>
-    </main>
-    <footer><%- include('./partials/footer'); %></footer>
-  </body>
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="ReallyReallyGoodReads - Discover and review books across all genres."
+  />
+  <meta name="author" content="Your Name" />
+  <title>ReallyReallyGoodReads - Book Discovery and Reviews</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="/path/to/favicon.ico" />
+  <link rel="canonical" href="https://www.reallyreallygoodreads.com/" />
+</head>
+
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <section class="about-section">
+      <h2>About</h2>
+      <p>
+        ReallyReallyGoodReads is a platform for book lovers to explore,
+        discover, and review books across various genres. Our mission is to
+        provide reliable book recommendations and create a community for readers
+        to share their experiences.
+      </p>
+      <p>
+        We offer an extensive collection of user reviews, organised by genre,
+        allowing users to search, filter, and browse books based on author,
+        title, rating, and more.
+      </p>
+    </section>
+  </main>
+  <footer><%- include('./partials/footer') %></footer>
+</body>
