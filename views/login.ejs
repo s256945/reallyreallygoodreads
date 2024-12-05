@@ -2,72 +2,54 @@
   <%- include('partials/header', { user: user, errorMessage: errorMessage }) %>
 
   <main>
-    <section>
-      <h2>Login or Register</h2>
+    <h2>Login or Register</h2>
 
-      <!-- Form toggle buttons -->
-      <div class="form-toggle">
+    <div class="form-container">
+      <div class="form-buttons-container">
+        <!-- Buttons are placed above the input fields -->
         <button id="show-login" class="primary-button">Login</button>
         <button id="show-register" class="primary-button">Register</button>
       </div>
 
-      <div class="form-container">
-        <!-- Login Form -->
-        <div class="login-container" id="login-form">
-          <form action="/login" method="POST">
-            <label for="login-username">Username:</label>
-            <input type="text" id="login-username" name="username" required />
+      <!-- Login Form -->
+      <div class="login-container" id="login-form">
+        <form action="/login" method="POST">
+          <label for="login-username">Username:</label>
+          <input type="text" id="login-username" name="username" required />
 
-            <label for="login-password">Password:</label>
-            <input
-              type="password"
-              id="login-password"
-              name="password"
-              required
-            />
+          <label for="login-password">Password:</label>
+          <input type="password" id="login-password" name="password" required />
 
-            <button type="submit">Login</button>
-          </form>
+          <button type="submit">Login</button>
+        </form>
 
-          <!-- Display error message if it exists -->
-          <% if (errorMessage) { %>
-          <div class="error-message" style="color: red">
-            <%= errorMessage %>
-          </div>
-          <% } %>
-        </div>
-
-        <!-- Register Form -->
-        <div
-          class="register-container"
-          id="register-form"
-          style="display: none"
-        >
-          <form action="/register" method="POST">
-            <label for="register-username">Username:</label>
-            <input
-              type="text"
-              id="register-username"
-              name="username"
-              required
-            />
-
-            <label for="register-email">Email:</label>
-            <input type="email" id="register-email" name="email" required />
-
-            <label for="register-password">Password:</label>
-            <input
-              type="password"
-              id="register-password"
-              name="password"
-              required
-            />
-
-            <button type="submit">Register</button>
-          </form>
-        </div>
+        <!-- Display error message if it exists -->
+        <% if (errorMessage) { %>
+        <div class="error-message" style="color: red"><%= errorMessage %></div>
+        <% } %>
       </div>
-    </section>
+
+      <!-- Register Form -->
+      <div class="register-container" id="register-form" style="display: none">
+        <form action="/register" method="POST">
+          <label for="register-username">Username:</label>
+          <input type="text" id="register-username" name="username" required />
+
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" name="email" required />
+
+          <label for="register-password">Password:</label>
+          <input
+            type="password"
+            id="register-password"
+            name="password"
+            required
+          />
+
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </div>
   </main>
 
   <footer><%- include('./partials/footer'); %></footer>
