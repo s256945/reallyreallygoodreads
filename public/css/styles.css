@@ -191,18 +191,30 @@ section p {
 }
 
 .reviews {
-  max-width: 600px;
+  max-width: 10000px;
   margin: auto;
-  font-family: Arial, sans-serif;
 }
 
 .filter-section {
   margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .filter-section label {
-  margin-right: 10px;
   font-weight: bold;
+}
+
+.filter-section select {
+  width: 150px;
+  max-width: 100%;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 ul#reviews-list {
