@@ -64,6 +64,27 @@ main {
   flex-grow: 1;
 }
 
+.about-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.features-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mission,
+.key-features {
+  padding: 1.5rem;
+}
+
+.key-features ul {
+  padding-left: 1.5rem;
+}
+
 header h1,
 main h2,
 section h2,
@@ -303,7 +324,7 @@ ul#reviews-list {
 }
 
 .review-item {
-  background-color: #FAEDEB;
+  background-color: #faedeb;
   padding: 15px;
   border: 1px solid #eac8c2;
   margin-bottom: 15px;
