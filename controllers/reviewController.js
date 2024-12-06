@@ -27,9 +27,19 @@ exports.addReview = async (req, res) => {
 exports.getAllReviews = async (req, res) => {
   try {
     const [reviews] = await db.execute(
-      `SELECT reviews.*, books.title, books.genre 
-       FROM reviews
-       JOIN books ON reviews.book_id = books.id`
+      `SELECT 
+  reviews.review_id, 
+  reviews.reviewer, 
+  reviews.review_text, 
+  reviews.rating, 
+  reviews.created_at, 
+  books.title AS book, 
+  books.genre
+FROM 
+  reviews
+JOIN 
+  books ON reviews.book_id = books.id;
+`
     );
 
     const [users] = await db.execute("SELECT DISTINCT reviewer FROM reviews");
@@ -37,12 +47,20 @@ exports.getAllReviews = async (req, res) => {
 
     const [genres] = await db.execute("SELECT DISTINCT genre FROM books");
 
+    const [books] = await db.execute("SELECT DISTINCT title FROM books");
+    const uniqueBooks = books.map((book) => book.title.trim());
+
     const allGenres = genres
       .map((genre) => genre.genre)
       .flatMap((genre) => genre.split(",").map((g) => g.trim()))
       .filter((genre, index, self) => self.indexOf(genre) === index);
 
-    res.render("reviews", { reviews, uniqueUsers, uniqueGenres: allGenres });
+    res.render("reviews", {
+      reviews,
+      uniqueUsers,
+      uniqueBooks,
+      uniqueGenres: allGenres,
+    });
   } catch (error) {
     console.error("Error fetching all reviews:", error);
     res.status(500).send("Error fetching all reviews");

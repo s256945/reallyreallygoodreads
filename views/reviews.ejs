@@ -11,12 +11,17 @@
       <option value="<%= user %>"><%= user %></option>
       <% }); %>
     </select>
-
     <label for="genre-filter">Filter by Genre:</label>
     <select id="genre-filter">
       <option value="all">All Genres</option>
       <% uniqueGenres.forEach(function(genre) { %>
       <option value="<%= genre %>"><%= genre %></option>
+      <% }); %></select
+    ><label for="book-filter">Filter by Book:</label>
+    <select id="book-filter">
+      <option value="all">All Books</option>
+      <% uniqueBooks.forEach(function(book) { %>
+      <option value="<%= book.trim().toLowerCase() %>"><%= book %></option>
       <% }); %>
     </select>
   </section>
@@ -28,8 +33,9 @@
       class="review-item"
       data-user="<%= review.reviewer %>"
       data-genre="<%= review.genre %>"
+      data-book="<%= review.book.trim().toLowerCase() %>"
     >
-      <p><strong>Book name:</strong> <%= review.title %></p>
+      <p><strong>Book name:</strong> <%= review.book %></p>
       <p><strong>Book genre:</strong> <%= review.genre %></p>
       <p><strong>User:</strong> <%= review.reviewer %></p>
       <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
@@ -48,11 +54,13 @@
   document.addEventListener("DOMContentLoaded", () => {
     const userFilter = document.getElementById("user-filter");
     const genreFilter = document.getElementById("genre-filter");
+    const bookFilter = document.getElementById("book-filter");
     const reviewsList = document.getElementById("reviews-list");
 
     function filterReviews() {
       const selectedUser = userFilter.value;
       const selectedGenre = genreFilter.value;
+      const selectedBook = bookFilter.value.toLowerCase();
 
       if (reviewsList) {
         const reviews = reviewsList.getElementsByClassName("review-item");
@@ -60,11 +68,15 @@
         Array.from(reviews).forEach((review) => {
           const reviewUser = review.getAttribute("data-user");
           const reviewGenre = review.getAttribute("data-genre");
+          const reviewBook = review.getAttribute("data-book").toLowerCase();
+          const matchesUser =
+            selectedUser === "all" || reviewUser === selectedUser;
+          const matchesGenre =
+            selectedGenre === "all" || reviewGenre === selectedGenre;
+          const matchesBook =
+            selectedBook === "all" || reviewBook === selectedBook;
 
-          if (
-            (selectedUser === "all" || reviewUser === selectedUser) &&
-            (selectedGenre === "all" || reviewGenre === selectedGenre)
-          ) {
+          if (matchesUser && matchesGenre && matchesBook) {
             review.style.display = "block";
           } else {
             review.style.display = "none";
@@ -77,5 +89,6 @@
 
     userFilter.addEventListener("change", filterReviews);
     genreFilter.addEventListener("change", filterReviews);
+    bookFilter.addEventListener("change", filterReviews);
   });
 </script>
