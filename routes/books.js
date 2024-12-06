@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
+const { authMiddleware, isAdmin } = require("../routes/authMiddleware");
 
 router.get("/", async (req, res) => {
   try {
     const [bookRows] = await db.execute("SELECT * FROM books");
 
-    res.render("books", { books: bookRows });
+    res.render("books", { books: bookRows, user: req.session.user });
   } catch (error) {
     console.error("Error fetching books:", error.message);
     res.status(500).send("Error fetching books");
@@ -33,7 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", [authMiddleware, isAdmin], async (req, res) => {
   const { title, author, description, genre, publishedDate, isbn } = req.body;
 
   if (!title || !author || !description || !genre || !publishedDate || !isbn) {

@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../config/database");
 
 exports.register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role = "user" } = req.body;
 
   try {
     const [existingUser] = await db.execute(
@@ -21,10 +21,10 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.execute("INSERT INTO users (username, password) VALUES (?, ?)", [
-      username,
-      hashedPassword,
-    ]);
+    await db.execute(
+      "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
+      [username, hashedPassword, role]
+    );
 
     return res.render("login", {
       successMessage:
@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    req.session.user = { id: user.id, username: user.username };
+    req.session.user = { id: user.id, username: user.username, role: user.role };
     res.redirect("/books");
   } catch (err) {
     console.error(err);

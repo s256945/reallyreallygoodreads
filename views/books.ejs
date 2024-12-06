@@ -2,25 +2,28 @@
 <main>
   <h2>Books List</h2>
   <div class="book-list">
+    <% if (user && user.role === "admin") { %>
     <button class="secondary-button" id="add-book-btn">Add a New Book</button>
+    <% } %>
 
     <div class="book-list">
       <% if (books.length > 0) { %>
-        <div class="book-grid">
-          <% books.forEach(function(book) { %>
-            <a href="/books/<%= book.id %>" class="book-card">
-              <div>
-                <h3><%= book.title %></h3>
-                <img src="/images/logo.png" alt="book" class="book-cover" />
-                <p>by <%= book.author %></p>
-              </div>
-            </a>
-          <% }); %>
-        </div>
+      <div class="book-grid">
+        <% books.forEach(function(book) { %>
+        <a href="/books/<%= book.id %>" class="book-card">
+          <div>
+            <h3><%= book.title %></h3>
+            <img src="/images/logo.png" alt="book" class="book-cover" />
+            <p>by <%= book.author %></p>
+          </div>
+        </a>
+        <% }); %>
+      </div>
       <% } else { %>
-        <p>No books found.</p>
+      <p>No books found.</p>
       <% } %>
     </div>
+  </div>
 </main>
 <%- include('add-book') %>
 <footer><%- include('./partials/footer'); %></footer>
@@ -63,10 +66,17 @@
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title, author, description, genre, publishedDate, isbn }),
+          body: JSON.stringify({
+            title,
+            author,
+            description,
+            genre,
+            publishedDate,
+            isbn,
+          }),
         });
         alert("Book added successfully");
-        
+
         addBookModal.style.opacity = "0";
         setTimeout(() => {
           addBookModal.style.display = "none";
