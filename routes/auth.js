@@ -6,6 +6,7 @@ router.get("/login", (req, res) => {
   res.render("login", {
     user: req.session.user || null,
     errorMessage: req.query.errorMessage || null,
+    successMessage: req.query.successMessage || null,
   });
 });
 
@@ -13,6 +14,7 @@ router.get("/register", (req, res) => {
   res.render("login", {
     user: req.session.user || null,
     errorMessage: req.query.errorMessage || null,
+    successMessage: req.query.successMessage || null,
   });
 });
 

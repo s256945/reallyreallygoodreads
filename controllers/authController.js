@@ -14,6 +14,7 @@ exports.register = async (req, res) => {
       return res.render("login", {
         errorMessage:
           "Username already exists, please try again with a different username",
+        successMessage: null,
         user: null,
       });
     }
@@ -25,7 +26,12 @@ exports.register = async (req, res) => {
       hashedPassword,
     ]);
 
-    res.send("Registration successful");
+    return res.render("login", {
+      successMessage:
+        "Registration successful, please log in with your new username and password",
+      errorMessage: null,
+      user: null,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Error registering user");
@@ -42,7 +48,9 @@ exports.login = async (req, res) => {
 
     if (rows.length === 0) {
       return res.render("login", {
-        errorMessage: "User not found, please try again with a different username, or register",
+        errorMessage:
+          "User not found, please try again with a different username, or register",
+        successMessage: null,
         user: null,
       });
     }
@@ -54,12 +62,12 @@ exports.login = async (req, res) => {
       return res.render("login", {
         errorMessage:
           "Invalid credentials, please try with a different password",
+        successMessage: null,
         user: null,
       });
     }
 
     req.session.user = { id: user.id, username: user.username };
-
     res.redirect("/books");
   } catch (err) {
     console.error(err);

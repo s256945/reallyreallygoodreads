@@ -1,64 +1,67 @@
-<body>
-  <%- include('partials/header', { user: user, errorMessage: errorMessage }) %>
+<%- include('partials/header', { user: user, errorMessage: errorMessage,
+successMessage: successMessage }) %>
 
-  <main>
-    <div class="form-container">
-      <h2>Login or Register</h2>
-      <div class="form-buttons-container">
-        <button id="show-login" class="primary-button">Login</button>
-        <button id="show-register" class="primary-button">Register</button>
-      </div>
-      <div class="login-container" id="login-form">
-        <form action="/login" method="POST">
-          <label for="login-username">Username:</label>
-          <input type="text" id="login-username" name="username" required />
-
-          <label for="login-password">Password:</label>
-          <input type="password" id="login-password" name="password" required />
-
-          <button type="submit">Login</button>
-        </form>
-        <% if (errorMessage) { %>
-        <div class="error-message" style="color: red"><%= errorMessage %></div>
-        <% } %>
-      </div>
-      <div class="register-container" id="register-form" style="display: none">
-        <form action="/register" method="POST">
-          <label for="register-username">Username:</label>
-          <input type="text" id="register-username" name="username" required />
-
-          <label for="register-email">Email:</label>
-          <input type="email" id="register-email" name="email" required />
-
-          <label for="register-password">Password:</label>
-          <input
-            type="password"
-            id="register-password"
-            name="password"
-            required
-          />
-
-          <button type="submit">Register</button>
-        </form>
-      </div>
+<main>
+  <div class="form-container">
+    <h2>Login or Register</h2>
+    <div class="form-buttons-container">
+      <button id="show-login" class="primary-button">Login</button>
+      <button id="show-register" class="primary-button">Register</button>
     </div>
-  </main>
+    <div class="login-container" id="login-form">
+      <form action="/login" method="POST">
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" name="username" required />
 
-  <footer><%- include('./partials/footer'); %></footer>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="password" required />
 
-  <script>
-    document
-      .getElementById("show-login")
-      .addEventListener("click", function () {
-        document.getElementById("login-form").style.display = "block";
-        document.getElementById("register-form").style.display = "none";
-      });
+        <button type="submit">Login</button>
+      </form>
 
-    document
-      .getElementById("show-register")
-      .addEventListener("click", function () {
-        document.getElementById("login-form").style.display = "none";
-        document.getElementById("register-form").style.display = "block";
-      });
-  </script>
-</body>
+      <% if (errorMessage) { %>
+      <div class="error-message" style="color: red"><%= errorMessage %></div>
+      <% } %> <% if (successMessage) { %>
+      <div class="success-message" style="color: green">
+        <%= successMessage %>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="register-container" id="register-form" style="display: none">
+      <form action="/register" method="POST">
+        <label for="register-username">Username:</label>
+        <input type="text" id="register-username" name="username" required />
+
+        <label for="register-email">Email:</label>
+        <input type="email" id="register-email" name="email" required />
+
+        <label for="register-password">Password:</label>
+        <input
+          type="password"
+          id="register-password"
+          name="password"
+          required
+        />
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer><%- include('./partials/footer'); %></footer>
+
+<script>
+  document.getElementById("show-login").addEventListener("click", function () {
+    document.getElementById("login-form").style.display = "block";
+    document.getElementById("register-form").style.display = "none";
+  });
+
+  document
+    .getElementById("show-register")
+    .addEventListener("click", function () {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("register-form").style.display = "block";
+    });
+</script>
