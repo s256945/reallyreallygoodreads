@@ -1,22 +1,85 @@
-<div id="add-book-modal" class="modal">
-    <div class="modal-content">
-      <h2>Add a New Book</h2>
-      <form id="add-book-form" action="/books/add" method="POST">
+<div
+  id="add-book-modal"
+  class="modal"
+  role="dialog"
+  aria-labelledby="add-book-title"
+  aria-hidden="true"
+>
+  <div class="modal-content">
+    <h2 id="add-book-title">Add a New Book</h2>
+    <form id="add-book-form" action="/books/add" method="POST">
+      <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
-  
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          aria-required="true"
+          aria-describedby="title-helper"
+        />
+        <small id="title-helper" class="helper-text"
+          >Enter the book's title.</small
+        >
+      </div>
+
+      <div class="form-group">
         <label for="author">Author:</label>
-        <input type="text" id="author" name="author" required />
-  
+        <input
+          type="text"
+          id="author"
+          name="author"
+          required
+          aria-required="true"
+          aria-describedby="author-helper"
+        />
+        <small id="author-helper" class="helper-text"
+          >Enter the author's name.</small
+        >
+      </div>
+
+      <div class="form-group">
         <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-  
+        <textarea
+          id="description"
+          name="description"
+          required
+          aria-required="true"
+          aria-describedby="description-helper"
+        ></textarea>
+        <small id="description-helper" class="helper-text"
+          >Provide a brief description of the book.</small
+        >
+      </div>
+
+      <div class="form-group">
         <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="genre" required />
-  
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          required
+          aria-required="true"
+          aria-describedby="genre-helper"
+        />
+        <small id="genre-helper" class="helper-text"
+          >Specify the genre of the book.</small
+        >
+      </div>
+
+      <!-- Published Date -->
+      <div class="form-group">
         <label for="published-date">Published Date:</label>
-        <input type="date" id="published-date" name="published-date" required />
-  
+        <input
+          type="date"
+          id="published-date"
+          name="published-date"
+          required
+          aria-required="true"
+        />
+      </div>
+
+      <div class="form-group">
         <label for="isbn">ISBN:</label>
         <input
           type="text"
@@ -25,10 +88,15 @@
           pattern="^\d{13}$"
           title="ISBN must be 13 digits"
           required
+          aria-required="true"
+          aria-describedby="isbn-helper"
         />
-  
-        <button type="submit">Add Book</button>
-      </form>
-    </div>
+        <small id="isbn-helper" class="helper-text"
+          >Enter a valid 13-digit ISBN.</small
+        >
+      </div>
+
+      <button type="submit">Add Book</button>
+    </form>
   </div>
-  
+</div>

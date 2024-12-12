@@ -350,13 +350,13 @@ ul#reviews-list {
 
 .review-content {
   font-style: italic;
-  color: #555;
+  color: #323337;
   margin-top: 10px;
 }
 
 .review-rating {
   font-weight: bold;
-  color: #eac8c2;
+  color: #754038;
   margin-top: 10px;
 }
 
@@ -561,7 +561,7 @@ button[type="submit"]:hover,
 footer {
   margin-top: 40px;
   text-align: center;
-  color: #777;
+  color: #323337;
   padding: 10px 0;
   background-color: #fbefe7;
 }
