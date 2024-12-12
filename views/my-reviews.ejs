@@ -4,9 +4,9 @@
   <h2>My Reviews</h2>
 
   <% if (reviews && reviews.length > 0) { %>
-  <ul id="reviews-list">
+  <div id="all-reviews-list" class="reviews-grid">
     <% reviews.forEach(function(review) { %>
-    <li class="review-item">
+    <div class="review-item">
       <p><strong>Book Name:</strong> <%= review.title %></p>
       <p><strong>Book Genre:</strong> <%= review.genre %></p>
       <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
@@ -22,9 +22,9 @@
         Edit
       </button>
       <button class="secondary-button" id="delete-btn">Delete</button>
-    </li>
+    </div>
     <% }); %>
-  </ul>
+  </div>
   <% } else { %>
   <p>You have not left any reviews yet!</p>
   <% } %>
@@ -98,7 +98,7 @@
           ).innerHTML = `<strong>Review:</strong> ${reviewText}`;
 
           alert("Review updated successfully!");
-          
+
           modal.style.opacity = "0";
           setTimeout(() => {
             modal.style.display = "none";
