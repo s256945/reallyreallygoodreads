@@ -9,7 +9,7 @@ const app = express();
 const booksRouter = require("./routes/books");
 const reviewsRouter = require("./routes/reviews");
 const authRouter = require("./routes/auth");
-const authMiddleware = require("./routes/authMiddleware");
+const { authMiddleware } = require("./routes/authMiddleware");
 
 require("dotenv").config();
 
