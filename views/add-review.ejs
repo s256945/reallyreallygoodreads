@@ -1,10 +1,10 @@
 <div id="review-modal" class="modal">
   <div class="modal-content">
-    <h2>Add a Review</h2>
-    <form action="/reviews" method="POST">
+    <h2>✨ Add a Review</h2>
+    <form id="add-review-form" action="/reviews" method="POST">
       <input type="text" name="bookId" value="<%= book.id %>" hidden />
 
-      <label for="reviewer">Your Name:</label>
+      <label for="reviewer">👤 Your Name:</label>
       <input
         type="text"
         name="reviewer"
@@ -13,8 +13,8 @@
         required
       />
 
-      <label for="rating">Rating (1-5):</label>
-      <select name="rating">
+      <label for="rating">⭐ Rating (1-5):</label>
+      <select name="rating" required>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -22,10 +22,40 @@
         <option value="5">5</option>
       </select>
 
-      <label for="reviewText">Your Review:</label>
+      <label for="reviewText">📝 Your Review:</label>
       <textarea name="reviewText" required></textarea>
 
-      <button type="submit">Submit Review</button>
+      <button type="submit">🚀 Submit Review</button>
     </form>
+
+    <div id="loadingMessage" style="display: none">
+      <p>🌐 Submitting your review...</p>
+    </div>
+
+    <div id="successMessage" style="display: none">
+      <p>🎉 Review submitted successfully!</p>
+    </div>
   </div>
 </div>
+
+<script>
+  const form = document.getElementById("add-review-form");
+  const loadingMessage = document.getElementById("loadingMessage");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", (event) => {
+    loadingMessage.style.display = "block";
+    successMessage.style.display = "none";
+
+    event.preventDefault();
+
+    setTimeout(() => {
+      loadingMessage.style.display = "none";
+      successMessage.style.display = "block";
+
+      setTimeout(() => {
+        form.submit();
+      }, 2000);
+    }, 2000);
+  });
+</script>

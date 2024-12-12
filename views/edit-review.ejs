@@ -1,24 +1,52 @@
 <div id="review-modal" class="modal">
-    <div class="modal-content">
-      <h2>Edit your review</h2>
-      <form action="/reviews/edit" method="POST">
-        <input type="hidden" id="review-id" name="reviewId" />
-  
-        <label for="review-rating">Rating (1-5):</label>
-        <input
-          type="number"
-          id="review-rating"
-          name="rating"
-          min="1"
-          max="5"
-          required
-        />
-  
-        <label for="review-text">Your Review:</label>
-        <textarea id="review-text" name="reviewText" required></textarea>
-  
-        <button type="submit">Save Changes</button>
-      </form>
+  <div class="modal-content">
+    <h2>✨ Edit your review</h2>
+    <form id="edit-review-form" action="/reviews/edit" method="POST">
+      <input type="hidden" id="review-id" name="reviewId" />
+
+      <label for="review-rating">⭐ Rating (1-5):</label>
+      <select name="review-rating" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label for="review-text">📝 Your Review:</label>
+      <textarea id="review-text" name="reviewText" required></textarea>
+
+      <button type="submit">🚀 Save Changes</button>
+    </form>
+
+    <div id="loadingMessage" style="display: none">
+      <p>🌐 Editing your review...</p>
+    </div>
+
+    <div id="successMessage" style="display: none">
+      <p>🎉 Review edited successfully!</p>
     </div>
   </div>
-  
+</div>
+
+<script>
+  const form = document.getElementById("edit-review-form");
+  const loadingMessage = document.getElementById("loadingMessage");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", (event) => {
+    loadingMessage.style.display = "block";
+    successMessage.style.display = "none";
+
+    event.preventDefault();
+
+    setTimeout(() => {
+      loadingMessage.style.display = "none";
+      successMessage.style.display = "block";
+
+      setTimeout(() => {
+        form.submit();
+      }, 2000);
+    }, 2000);
+  });
+</script>

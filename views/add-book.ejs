@@ -6,10 +6,10 @@
   aria-hidden="true"
 >
   <div class="modal-content">
-    <h2 id="add-book-title">Add a New Book</h2>
+    <h2 id="add-book-title">✨ Add a New Book</h2>
     <form id="add-book-form" action="/books/add" method="POST">
       <div class="form-group">
-        <label for="title">Title:</label>
+        <label for="title">📚 Title:</label>
         <input
           type="text"
           id="title"
@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-group">
-        <label for="author">Author:</label>
+        <label for="author">🖊️ Author:</label>
         <input
           type="text"
           id="author"
@@ -39,7 +39,7 @@
       </div>
 
       <div class="form-group">
-        <label for="description">Description:</label>
+        <label for="description">📝 Description:</label>
         <textarea
           id="description"
           name="description"
@@ -53,7 +53,7 @@
       </div>
 
       <div class="form-group">
-        <label for="genre">Genre:</label>
+        <label for="genre">🎭 Genre:</label>
         <input
           type="text"
           id="genre"
@@ -67,9 +67,8 @@
         >
       </div>
 
-      <!-- Published Date -->
       <div class="form-group">
-        <label for="published-date">Published Date:</label>
+        <label for="published-date">📅 Published Date:</label>
         <input
           type="date"
           id="published-date"
@@ -80,7 +79,7 @@
       </div>
 
       <div class="form-group">
-        <label for="isbn">ISBN:</label>
+        <label for="isbn">📖 ISBN:</label>
         <input
           type="text"
           id="isbn"
@@ -96,7 +95,37 @@
         >
       </div>
 
-      <button type="submit">Add Book</button>
+      <button type="submit">🚀 Add Book</button>
     </form>
+
+    <div id="loadingMessage" style="display: none">
+      <p>🌐 Submitting the book...</p>
+    </div>
+
+    <div id="successMessage" style="display: none">
+      <p>🎉 Book added successfully!</p>
+    </div>
   </div>
 </div>
+
+<script>
+  const form = document.getElementById("add-book-form");
+  const loadingMessage = document.getElementById("loadingMessage");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", (event) => {
+    loadingMessage.style.display = "block";
+    successMessage.style.display = "none";
+
+    event.preventDefault();
+
+    setTimeout(() => {
+      loadingMessage.style.display = "none";
+      successMessage.style.display = "block";
+
+      setTimeout(() => {
+        form.submit();
+      }, 2000);
+    }, 2000);
+  });
+</script>
