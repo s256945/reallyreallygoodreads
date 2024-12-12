@@ -54,6 +54,7 @@ exports.getAllReviews = async (req, res) => {
     const uniqueUsers = users.map((user) => user.reviewer);
     const [genres] = await db.execute("SELECT DISTINCT genre FROM books");
     const [books] = await db.execute("SELECT DISTINCT title FROM books");
+    const uniqueBooks = books.map((book) => book.title.trim());
 
     // Process genres into a list of unique genres, handling comma-separated genres
     const allGenres = genres
