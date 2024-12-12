@@ -24,6 +24,12 @@ exports.getBookById = async (req, res) => {
       bookId,
     ]);
 
+    // Select reviews for that book
+    const [reviewRows] = await db.execute(
+      "SELECT * FROM reviews WHERE book_id = ?",
+      [bookId]
+    );
+
     // Render the book details page
     res.render("book-details", { book: bookRows[0], reviews: reviewRows });
   } catch (error) {

@@ -393,6 +393,7 @@ form {
 }
 
 input,
+select,
 textarea {
   padding: 12px;
   font-size: 1rem;
@@ -400,10 +401,12 @@ textarea {
   background-color: #fbefe7;
   transition: border-color 0.3s;
   width: 100%;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
 }
 
 input:focus,
-textarea:focus {
+select:focus textarea:focus {
   border-color: #eac8c2;
   outline: none;
 }
