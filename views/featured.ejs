@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<main class="featured-reviews">
+  <h2>Featured Reviews</h2>
+
+  <section class="intro">
+    <p>
+      Welcome to our Featured Reviews page! Here, you'll find a randomly
+      selected collection of book reviews. These reviews come from our
+      community, featuring various books and genres. Each review includes the
+      book's title, genre, user rating, and the reviewer's thoughts. Explore
+      these randomly selected reviews to discover different perspectives on the
+      books we feature!
+    </p>
+  </section>
+
+  <% if (randomReviews && randomReviews.length > 0) { %>
+  <div id="featured-reviews-list" class="reviews-grid">
+    <% randomReviews.forEach(function(review) { %>
+    <div class="review-item">
+      <p><strong>Book Name:</strong> <%= review.book %></p>
+      <p><strong>Genre:</strong> <%= review.genre %></p>
+      <p><strong>User:</strong> <%= review.reviewer %></p>
+      <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
+      <p><strong>Review:</strong> <%= review.review_text %></p>
+    </div>
+    <% }); %>
+  </div>
+  <% } else { %>
+  <p>No featured reviews found.</p>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>

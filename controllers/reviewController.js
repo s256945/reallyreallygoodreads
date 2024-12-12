@@ -152,3 +152,32 @@ exports.deleteReview = async (req, res) => {
     res.status(500).send("Error deleting review");
   }
 };
+
+exports.getFeaturedReviews = async (req, res) => {
+  try {
+    const [reviews] = await db.execute(
+      `SELECT 
+      reviews.review_id, 
+      reviews.reviewer, 
+      reviews.review_text, 
+      reviews.rating, 
+      reviews.created_at, 
+      books.title AS book, 
+      books.genre
+    FROM 
+      reviews
+    JOIN 
+      books ON reviews.book_id = books.id;`
+    );
+
+    const shuffledReviews = reviews.sort(() => 0.5 - Math.random());
+    const randomReviews = shuffledReviews.slice(0, 10);
+
+    res.render("featured", {
+      randomReviews,
+    });
+  } catch (error) {
+    console.error("Error fetching random reviews:", error);
+    res.status(500).send("Error fetching random reviews");
+  }
+};
