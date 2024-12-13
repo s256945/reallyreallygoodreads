@@ -1,11 +1,11 @@
 <div id="review-modal" class="modal">
   <div class="modal-content">
     <h2>✨ Edit your review</h2>
-    <form id="edit-review-form" action="/reviews/edit" method="POST">
+    <form action="/reviews/edit" method="POST">
       <input type="hidden" id="review-id" name="reviewId" />
 
       <label for="review-rating">⭐ Rating (1-5):</label>
-      <select name="review-rating" required>
+      <select id="review-rating" required>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

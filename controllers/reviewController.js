@@ -119,11 +119,6 @@ exports.editReview = async (req, res) => {
     return res.status(400).send("All fields are required");
   }
 
-  // Check rating is a number between 1 and 5
-  if (isNaN(rating) || rating < 1 || rating > 5) {
-    return res.status(400).send("Rating must be between 1 and 5");
-  }
-
   try {
     // Update the review in the DB with new text and rating
     await db.execute(
